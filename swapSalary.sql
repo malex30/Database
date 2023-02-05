@@ -1,29 +1,31 @@
--- 1873.
+-- 627.
 
--- Table: Employees
+-- Table: Salary
 
--- +-------------+---------+
--- | Column Name | Type    |
--- +-------------+---------+
--- | employee_id | int     |
--- | name        | varchar |
--- | salary      | int     |
--- +-------------+---------+
--- employee_id is the primary key for this table.
--- Each row of this table indicates the employee ID, employee name, and salary.
+-- +-------------+----------+
+-- | Column Name | Type     |
+-- +-------------+----------+
+-- | id          | int      |
+-- | name        | varchar  |
+-- | sex         | ENUM     |
+-- | salary      | int      |
+-- +-------------+----------+
+-- id is the primary key for this table.
+-- The sex column is ENUM value of type ('m', 'f').
+-- The table contains information about an employee.
  
 
--- Write an SQL query to calculate the bonus of each employee. The bonus of an employee is 100% of their salary if the ID of the employee is an odd number and the employee name does not start with the character 'M'. The bonus of an employee is 0 otherwise.
+-- Write an SQL query to swap all 'f' and 'm' values (i.e., change all 'f' values to 'm' and vice versa) with a single update statement and no intermediate temporary tables.
 
--- Return the result table ordered by employee_id.
+-- Note that you must write a single update statement, do not write any select statement for this problem.
 
-SELECT employee_id,
-CASE
-    WHEN employee_id % 2 != 0 and name not like('M%') THEN salary
-    ELSE 0
+-- The query result format is in the following example.
+
+/* Write your T-SQL query statement below */
+UPDATE salary
+SET sex = 
+CASE 
+    WHEN sex = 'f' THEN 'm' 
+    WHEN sex = 'm' THEN 'f'
 END
-AS bonus
-FROM Employees
-Order by employee_id;
-
--- This is the first time Ive used the case command and although slower compared to others. Im happy with getting this one done.
+WHERE sex IN ('f','m')
